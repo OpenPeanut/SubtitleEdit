@@ -1,0 +1,3 @@
+[submodule "build-magic"]
+	path = build-magic
+	url = git@github.com:OpenPeanut/build-magic.git
