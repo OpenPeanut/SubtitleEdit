@@ -11,9 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.peanut.subtitleedit.FileChooser.registerFileChooser
 import com.peanut.subtitleedit.ui.theme.SubtitleEditTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity : FileChooseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
