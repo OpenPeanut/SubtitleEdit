@@ -10,6 +10,8 @@ lifecycleRuntimeKtx = "2.10.0"
 activityCompose = "1.12.2"
 composeBom = "2024.09.00"
 buildTools = "31.13.0"
+ffmpegKit = "6.1.1"
+petlin = "-SNAPSHOT"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -29,6 +31,8 @@ androidx-compose-material3 = { group = "androidx.compose.material3", name = "mat
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "buildTools" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kgp" }
+ffmpeg-kit-full = { group = "com.moizhassan.ffmpeg", name = "ffmpeg-kit-16kb", version.ref = "ffmpegKit" }
+peanut-petlin = { module = "com.github.PPeanutButter.AndroidSDK:petlin", version.ref = "petlin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

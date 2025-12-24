@@ -46,10 +46,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import android.widget.Toast
 import java.util.Locale
 
 class MainActivity : FileChooseActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +57,10 @@ class MainActivity : FileChooseActivity() {
         setContent {
             SubtitleEditTheme {
                 var selectedFileState by remember { mutableStateOf<Uri?>(null) }
+                val context = this@MainActivity
+                val processor = remember { SubtitleProcessor(context) }
+                val scope = rememberCoroutineScope()
+                
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     SubtitleEditScreen(
                         modifier = Modifier.padding(innerPadding),
@@ -70,7 +74,32 @@ class MainActivity : FileChooseActivity() {
                             selectedFileState = null
                         },
                         onConvert = { file, offset ->
-
+                            if (file == null) {
+                                Toast.makeText(context, "请先选择字幕文件", Toast.LENGTH_SHORT).show()
+                                return@SubtitleEditScreen
+                            }
+                            
+                            scope.launch {
+                                processor.adjustSubtitleTime(
+                                    activity = this@MainActivity,
+                                    inputUri = file,
+                                    offsetSeconds = offset,
+                                    onSuccess = {
+                                        Toast.makeText(
+                                            context,
+                                            "处理成功！文件已保存",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    },
+                                    onError = { error ->
+                                        Toast.makeText(
+                                            context,
+                                            "处理失败: $error",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }
+                                )
+                            }
                         }
                     )
                 }

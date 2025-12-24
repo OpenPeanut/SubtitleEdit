@@ -1,3 +1,5 @@
+import java.net.URI
+
 pluginManagement {
     includeBuild("build-magic")
     repositories {
@@ -17,6 +19,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = URI.create("https://jitpack.io") }
     }
     versionCatalogs {
         create("magicLibs") {
